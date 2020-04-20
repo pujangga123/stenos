@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>        
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/97705027ec.js" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+        <div class="m-3 container style="width:50%">
+            <div class="row">
+                <div class="col-3">
+                    start: <span id="start"></span><br>
+                    end: <span id="end"></span><br>
+                    Last Key: <span id="lastKey"></span><br>
+                    Last KeyCode: <span id="lastKeyCode"></span>
+                    <div>
+                        shortcuts:<br>
+                        -- : perulangan kata<br>
+                        
+                    </div>
+                </div>
+                <div class="col-7">
+                    <textarea id="page" class="form-control" ></textarea>
+                </div>
+            </div>
+        </div>
+        <script>
+            var page = document.getElementById("page");
+            var start = 0;
+            var end = 0;
+            var lastKey = "";
+            var lastKeyCode = "";
+
+            $("#page").keyup(function(event) {
+                start = page.selectionStart;
+                end = page.selectionEnd;  
+                lastKey = event.key;
+                lastKeyCode = event.keyCode;
+
+                
+                console.log(event);
+                showInfo();    
+            });
+           
+            function showInfo() {
+                $("#start").html(start);
+                $("#end").html(end);
+                $("#lastKey").html(lastKey);
+                $("#lastKeyCode").html(lastKeyCode);
+            }
+
+        </script>
+    </body>
+</html>
