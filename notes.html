@@ -15,7 +15,12 @@
                     start: <span id="start"></span><br>
                     end: <span id="end"></span><br>
                     Last Key: <span id="lastKey"></span><br>
-                    Last KeyCode: <span id="lastKeyCode"></span>
+                    Last KeyCode: <span id="lastKeyCode"></span><br> 
+                    Ctrl:<span id="keyCtrl"></span><br>
+                    Shift:<span id="keyShift"></span><br>
+                    Alt:<span id="keyAlt"></span><br>
+                    line: <span id="lineAt"></span><br>
+                    col: <span id="colAt"></span><br>
                     <div>
                         shortcuts:<br>
                         -- : perulangan kata<br>
@@ -23,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-7">
-                    <textarea id="page" class="form-control" ></textarea>
+                    <textarea id="page" class="form-control" style="height:400px"></textarea>
                 </div>
             </div>
         </div>
@@ -33,16 +38,46 @@
             var end = 0;
             var lastKey = "";
             var lastKeyCode = "";
+            var keyShift = false;
+            var keyCtrl = false;
+            var keyAlt = false;
 
-            $("#page").keyup(function(event) {
+            $("#page").keydown(function(event) {
                 start = page.selectionStart;
                 end = page.selectionEnd;  
                 lastKey = event.key;
                 lastKeyCode = event.keyCode;
-
+                keyShift = event.shiftKey;
+                keyCtrl = event.ctrlKey;
+                keyAlt = event.altKey;               
                 
-                console.log(event);
-                showInfo();    
+                //shortcuts ==============================================
+                if(keyCtrl && lastKeyCode==74) { // Ctrl+J
+                    page.selectionStart--;
+                    page.selectionEnd--;
+                    event.preventDefault();
+                }
+                if(keyCtrl && lastKeyCode==76) { // Ctrl+L
+                    page.selectionStart++;
+                    page.selectionEnd++;
+                    event.preventDefault();
+                }
+                
+                //console.log(event);
+                //var specials = [74,76,85,79];
+                //if(keyCtrl && specials.indexOf(lastKeyCode)!==-1) {
+                //    event.preventDefault();
+                //}
+                
+            });
+
+            $("#page").keyup(function(event) {
+                showInfo();  
+            });
+
+            $("#page").click(function(event) {
+                $("#lineAt").html(lineAt());
+                $("#colAt").html(colAt());
             });
            
             function showInfo() {
@@ -50,6 +85,22 @@
                 $("#end").html(end);
                 $("#lastKey").html(lastKey);
                 $("#lastKeyCode").html(lastKeyCode);
+                $("#lineAt").html(lineAt());
+                $("#colAt").html(colAt());
+                $("#keyShift").html(keyShift);
+                $("#keyCtrl").html(keyCtrl);
+                $("#keyAlt").html(keyAlt);
+            }            
+
+            function lineAt() {                
+                return page.value.substr(0, page.selectionStart).split("\n").length;
+            }
+
+            function colAt() {
+                var s = page.value.substr(0,page.selectionStart);
+                var lastn = s.lastIndexOf("\n");
+                var l = s.substr(lastn+1,s.length);
+                return l.length;
             }
 
         </script>
