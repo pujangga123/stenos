@@ -4,9 +4,7 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>        
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/97705027ec.js" crossorigin="anonymous"></script>
-        
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>        
     </head>
     <body>
         <div class="m-3 container style="width:50%">
@@ -28,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-7">
-                    <textarea id="page" class="form-control" style="height:400px"></textarea>
+                    <textarea id="page" class="form-control" style="height:400px; font-family: 'Courier New', Courier, monospace">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
                 </div>
             </div>
         </div>
@@ -42,7 +40,7 @@
             var keyCtrl = false;
             var keyAlt = false;
 
-            $("#page").keydown(function(event) {
+            $("#page").keyup(function(event) {
                 start = page.selectionStart;
                 end = page.selectionEnd;  
                 lastKey = event.key;
@@ -54,12 +52,30 @@
                 //shortcuts ==============================================
                 if(keyCtrl && lastKeyCode==74) { // Ctrl+J
                     page.selectionStart--;
-                    page.selectionEnd--;
+                    page.selectionEnd = page.selectionStart;
+                    console.log('1');
                     event.preventDefault();
                 }
                 if(keyCtrl && lastKeyCode==76) { // Ctrl+L
                     page.selectionStart++;
-                    page.selectionEnd++;
+                    page.selectionEnd = page.selectionStart;
+                    console.log('2');
+                    event.preventDefault();
+                }
+                if(keyCtrl && lastKeyCode==73) { // Ctrl+I
+                    var l = lineAt();
+                    var c = colAt();
+                    if(l>1) {
+                        page.selectionStart = getAbsolutePos(--l,c);
+                        page.selectionEnd = page.selectionStart;
+                    }                    
+                    event.preventDefault();
+                }
+                if(keyCtrl && lastKeyCode==75) { // Ctrl+K)
+                    var l = lineAt();
+                    var c = colAt();
+                    page.selectionStart = getAbsolutePos(++l,c);
+                    page.selectionEnd = page.selectionStart;
                     event.preventDefault();
                 }
                 
@@ -68,11 +84,8 @@
                 //if(keyCtrl && specials.indexOf(lastKeyCode)!==-1) {
                 //    event.preventDefault();
                 //}
-                
-            });
-
-            $("#page").keyup(function(event) {
                 showInfo();  
+                
             });
 
             $("#page").click(function(event) {
@@ -96,11 +109,19 @@
                 return page.value.substr(0, page.selectionStart).split("\n").length;
             }
 
+            function getAbsolutePos(line,col) {
+                var lastN =0;
+                for(var n=1; n<line;n++) {
+                    lastN = page.value.indexOf("\n",lastN);                    
+                }                
+                return lastN + col - 1;
+            }
+
             function colAt() {
                 var s = page.value.substr(0,page.selectionStart);
                 var lastn = s.lastIndexOf("\n");
                 var l = s.substr(lastn+1,s.length);
-                return l.length;
+                return l.length+1;
             }
 
         </script>
