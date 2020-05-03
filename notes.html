@@ -1,34 +1,76 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>        
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>        
+        <title>STENOS (v0.1 - still in development)</title>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
     </head>
     <body>
-        <div class="m-3 container style="width:50%">
-            <div class="row">
-                <div class="col-3">
-                    start: <span id="start"></span><br>
-                    end: <span id="end"></span><br>
-                    Last Key: <span id="lastKey"></span><br>
-                    Last KeyCode: <span id="lastKeyCode"></span><br> 
-                    Ctrl:<span id="keyCtrl"></span><br>
-                    Shift:<span id="keyShift"></span><br>
-                    Alt:<span id="keyAlt"></span><br>
-                    line: <span id="lineAt"></span><br>
-                    col: <span id="colAt"></span><br>
-                    <div>
-                        shortcuts:<br>
-                        -- : perulangan kata<br>
-                        
-                    </div>
-                </div>
-                <div class="col-7">
-                    <textarea id="page" class="form-control" style="height:400px; font-family: 'Courier New', Courier, monospace">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">STENOS</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </ul>
+                <div class="my-2 my-lg-0">
+                    <div class="mr-sm-2"><a href="https://github.com/pujangga123/stenos" style="font-size:0.8em">GitHub</a></div>                    
                 </div>
             </div>
+        </nav>
+        <div class="m-3 container" style="width:98%; overflow:hidden;">
+            <div class="row" style="height:500px; ">
+                <div class="col-3 p-0">                        
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                          <a class="nav-item nav-link active" id="nav-stat-tab" data-toggle="tab" href="#nav-stat" role="tab" aria-controls="nav-stat" aria-selected="true">Stat</a>
+                          <a class="nav-item nav-link" id="nav-kamus-tab" data-toggle="tab" href="#nav-kamus" role="tab" aria-controls="nav-kamus" aria-selected="false">Kamus</a>
+                        </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active p-2 border-left border-bottom border-right" id="nav-stat" role="tabpanel" aria-labelledby="nav-stat-tab" style="height:450px">
+                            start: <span id="start"></span><br>
+                            end: <span id="end"></span><br>
+                            Last Key: <span id="lastKey"></span><br>
+                            Last KeyCode: <span id="lastKeyCode"></span><br> 
+                            Last Word: [<span id="lastWord"></span>]<br>
+                            Last Word Pos: <span id="lastWordPos"></span><br>
+                            Last Word Length: <span id="lastWordLength"></span><br>
+                            Ctrl: <span id="keyCtrl"></span><br>
+                            Shift: <span id="keyShift"></span><br>
+                            Alt: <span id="keyAlt"></span><br>
+                            line: <span id="lineAt"></span><br>
+                            col: <span id="colAt"></span><br>
+                        </div>
+                        <div class="tab-pane fade  border-left border-bottom border-right" id="nav-kamus" role="tabpanel" aria-labelledby="nav-kamus-tab">
+                            <textarea class="form-control" id="substable" style="height:450px; border:0">masing-,masing-masing
+orang-,orang-orang
+                            </textarea>
+                        </div>                        
+                      </div>                   
+                    
+                </div>
+                <div class="col-7 p-0">
+                    <textarea id="page" class="form-control" style="height:490px; font-family: 'Courier New', Courier, monospace">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+                </div>
+            </div>
+           
         </div>
         <script>
             var page = document.getElementById("page");
@@ -36,55 +78,111 @@
             var end = 0;
             var lastKey = "";
             var lastKeyCode = "";
+            var lastWord = "";
+            var lastWordPos = 0;
+            var lastWordLength = 0;
             var keyShift = false;
             var keyCtrl = false;
             var keyAlt = false;
+            var substable = [];
+            var triggerChar = [" ",".",",","!",")","\"","'","?","\n"];
+            var validCode = [];
+            for(var i=65;i<=90;i++) {
+                validCode.push(String.fromCharCode(i));
+            }
+            validCode.push("-");
+            loadSubsTable();
 
-            $("#page").keyup(function(event) {
-                start = page.selectionStart;
+            $("#page").keyup(function(event){
+                start = page.selectionStart; //pada event keydown, selectionStart adalah posisi sebelumnya
                 end = page.selectionEnd;  
+
+                //check last word
+                if(triggerChar.indexOf(lastKey)>=0) {
+                    var n = page.selectionStart-2;                    
+                    var w = "";
+                    var c = "";
+                    do  {                        
+                        c = page.value.substr(n,1);                        
+                        if(validCode.indexOf(c.toUpperCase())>=0) {
+                            w = c + w;
+                            n--;
+                        }
+                    } while (validCode.indexOf(c.toUpperCase())>=0 && n>=0);
+                    lastWord = w;
+                    lastWordPos = n+1;
+                    if(lastWord==0) {
+                        lastWordPos--;
+                    } else {
+                        lastWordLength = w.length;
+                    }
+
+                    if(lastWord.substr(-1)=='-') {
+                        var subs = lastWord.substr(0,lastWord.length)+lastWord.substr(0,lastWord.length-1);
+                        var s1 = page.value.substr(0,lastWordPos);
+                        var s2 = page.value.substr(lastWordPos+lastWordLength, page.value.length);
+                        page.value = s1+subs+s2;
+                        page.selectionStart = lastWordPos + subs.length+1;
+                        page.selectionEnd = page.selectionStart;
+                    } else {
+                        //cari lastWord di substable
+                        var i = 0;
+                        var found = false;
+                        while(!found && i<substable.length) {
+                            if(substable[i][0]==lastWord) {
+                                found = true;
+                            } else {
+                                i++;
+                            }
+                        }
+                        if(found) {
+                            var s1 = page.value.substr(0,lastWordPos);
+                            var s2 = page.value.substr(lastWordPos+lastWordLength, page.value.length);
+                            page.value = s1+substable[i][1]+s2;
+                            page.selectionStart = lastWordPos + substable[i][1].length+1;
+                            page.selectionEnd = page.selectionStart;
+                        }
+                    }
+                }
+                showInfo();
+            });
+
+            $("#page").keydown(function(event) {                
                 lastKey = event.key;
                 lastKeyCode = event.keyCode;
                 keyShift = event.shiftKey;
                 keyCtrl = event.ctrlKey;
-                keyAlt = event.altKey;               
+                keyAlt = event.altKey;                
                 
                 //shortcuts ==============================================
-                if(keyCtrl && lastKeyCode==74) { // Ctrl+J
-                    page.selectionStart--;
-                    page.selectionEnd = page.selectionStart;
-                    console.log('1');
-                    event.preventDefault();
-                }
-                if(keyCtrl && lastKeyCode==76) { // Ctrl+L
-                    page.selectionStart++;
-                    page.selectionEnd = page.selectionStart;
-                    console.log('2');
-                    event.preventDefault();
-                }
-                if(keyCtrl && lastKeyCode==73) { // Ctrl+I
-                    var l = lineAt();
-                    var c = colAt();
-                    if(l>1) {
-                        page.selectionStart = getAbsolutePos(--l,c);
-                        page.selectionEnd = page.selectionStart;
-                    }                    
-                    event.preventDefault();
-                }
-                if(keyCtrl && lastKeyCode==75) { // Ctrl+K)
-                    var l = lineAt();
-                    var c = colAt();
-                    page.selectionStart = getAbsolutePos(++l,c);
+                //Cut Line
+
+                //Clear Line: Ctrl+D
+                if(keyCtrl && lastKeyCode == 68) {
+                    var s = page.value.substr(0,page.selectionStart);
+                    var n1 = s.lastIndexOf("\n");
+                    var n2 = page.value.indexOf("\n",n1+1);
+                    var s1 = page.value.substr(0,n1);
+                    var s2 = page.value.substr(n2,page.value.length);
+                    page.value = s1+"\n"+s2;
+                    page.selectionStart = n1+1;
                     page.selectionEnd = page.selectionStart;
                     event.preventDefault();
                 }
-                
+
+                if(keyCtrl && lastKeyCode == 88 && page.selectionStart==page.selectionEnd) {                    
+                    var s = page.value.substr(0,page.selectionStart);
+                    var n1 = s.lastIndexOf("\n");
+                    var n2 = page.value.indexOf("\n",n1+1);                    
+                    page.selectionStart = n1+1;
+                    page.selectionEnd = n2+1;
+                }
+
                 //console.log(event);
                 //var specials = [74,76,85,79];
                 //if(keyCtrl && specials.indexOf(lastKeyCode)!==-1) {
                 //    event.preventDefault();
                 //}
-                showInfo();  
                 
             });
 
@@ -92,6 +190,14 @@
                 $("#lineAt").html(lineAt());
                 $("#colAt").html(colAt());
             });
+
+            function loadSubsTable() {
+                substable = [];
+                var lines = $("#substable").val().trim().split("\n").forEach(function(element,i) {
+                  substable.push(element.split(","));  
+                });
+                substable.sort();
+            }
            
             function showInfo() {
                 $("#start").html(start);
@@ -103,6 +209,9 @@
                 $("#keyShift").html(keyShift);
                 $("#keyCtrl").html(keyCtrl);
                 $("#keyAlt").html(keyAlt);
+                $("#lastWord").html(lastWord);
+                $("#lastWordPos").html(lastWordPos);
+                $("#lastWordLength").html(lastWordLength);
             }            
 
             function lineAt() {                
