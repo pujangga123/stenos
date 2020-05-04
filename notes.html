@@ -194,9 +194,21 @@ orang-,orang-orang
             function loadSubsTable() {
                 substable = [];
                 var lines = $("#substable").val().trim().split("\n").forEach(function(element,i) {
-                  substable.push(element.split(","));  
+                    if(element.substr(0,1)!="#" && element.trim()!='') {
+                        substable.push(element.split(","));  
+                    }
                 });
                 substable.sort();
+            }            
+
+            function fetchDict(url) {
+                $.ajax({
+                    url : url,
+                    dataType: "text",
+                    success : function (data) {
+                        $("#page").val(data);
+                    }
+                });
             }
            
             function showInfo() {
@@ -232,6 +244,10 @@ orang-,orang-orang
                 var l = s.substr(lastn+1,s.length);
                 return l.length+1;
             }
+
+            $(document).ready(function(){
+                //alert('ffd');
+            });
 
         </script>
     </body>
